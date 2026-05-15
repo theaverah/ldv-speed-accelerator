@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "speed-accelerator",
+			"path": "../../.."
+		},
+		{
+			"name": "docs",
+			"path": "../../../../archived-speed-accelerator/docs"
+		}
+	],
+	"settings": {}
+}
