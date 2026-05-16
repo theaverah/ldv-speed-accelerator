@@ -51,13 +51,13 @@ export function KaraokeText() {
       style={{ backgroundColor: 'var(--color-bg)' }}
     >
       <Container>
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <p
             style={{
               fontFamily: 'var(--font-body)',
               fontWeight: 400,
-              fontSize: '36px',
-              lineHeight: '48px',
+              fontSize: 'clamp(18px, 4vw, 36px)',
+              lineHeight: 1.35,
             }}
           >
             {SEGMENTS.map((seg, si) =>

@@ -11,8 +11,8 @@ export function Container({ children, className, as: Tag = 'div' }: ContainerPro
     <Tag
       className={cn('w-full', className)}
       style={{
-        paddingLeft: 'max(160px, calc(50vw - 560px))',
-        paddingRight: 'max(160px, calc(50vw - 560px))',
+        paddingLeft: 'var(--container-px)',
+        paddingRight: 'var(--container-px)',
       }}
     >
       {children}

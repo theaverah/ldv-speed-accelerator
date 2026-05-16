@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { Segment } from '@/data/personas'
 
@@ -379,6 +379,8 @@ interface PersonaCardProps {
   onOpen: (segment: Segment) => void
   onHover: (id: number | null) => void
   hasBorderLeft?: boolean
+  isLast?: boolean
+  isActive?: boolean
 }
 
 function ExpandIcon({ hovered }: { hovered: boolean }) {
@@ -414,8 +416,18 @@ function ExpandIcon({ hovered }: { hovered: boolean }) {
   )
 }
 
-export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft }: PersonaCardProps) {
+export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, isActive = false }: PersonaCardProps) {
   const [hovered, setHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const active = hovered || isActive
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
     <div
@@ -425,9 +437,10 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft }: Persona
       className="cursor-pointer flex flex-col p-8"
       style={{
         gap: '24px',
-        backgroundColor: hovered ? '#0D0E0F' : 'var(--color-bg)',
+        backgroundColor: active ? '#0D0E0F' : 'var(--color-bg)',
         borderRight: '1px solid rgba(255,255,255,0.06)',
-        borderLeft: hasBorderLeft ? '1px solid rgba(255,255,255,0.06)' : undefined,
+        borderLeft: (hasBorderLeft || isMobile) ? '1px solid rgba(255,255,255,0.06)' : undefined,
+        borderBottom: (isMobile && !isLast) ? '1px solid rgba(255,255,255,0.06)' : undefined,
         transition: 'background-color 200ms ease',
       }}
     >
@@ -445,7 +458,7 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft }: Persona
           >
             {segment.name}
           </span>
-          <ExpandIcon hovered={hovered} />
+          <ExpandIcon hovered={active} />
         </div>
 
         <span
@@ -462,9 +475,9 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft }: Persona
 
       {/* Graphic */}
       <div style={{ height: '200px' }}>
-        {segment.id === 1 && <UteIllustration hovered={hovered} />}
-        {segment.id === 2 && <SuvIllustration hovered={hovered} />}
-        {segment.id === 3 && <VanIllustration hovered={hovered} />}
+        {segment.id === 1 && <UteIllustration hovered={active} />}
+        {segment.id === 2 && <SuvIllustration hovered={active} />}
+        {segment.id === 3 && <VanIllustration hovered={active} />}
       </div>
 
       {/* Description */}

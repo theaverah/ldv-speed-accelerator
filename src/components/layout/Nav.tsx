@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useActiveSection } from '@/hooks/useActiveSection'
+
 import { Container } from '@/components/ui/Container'
 import { useScramble } from '@/components/ui/ScrambleText'
 
@@ -10,36 +11,69 @@ interface NavLinkProps {
   href: string
   isActive: boolean
   onSetActive: () => void
+  comingSoon?: boolean
 }
 
-function NavLink({ label, href, isActive, onSetActive }: NavLinkProps) {
+function NavLink({ label, href, isActive, onSetActive, comingSoon }: NavLinkProps) {
   const { display, scramble } = useScramble(label)
   const [hovered, setHovered] = useState(false)
 
   return (
-    <a
-      href={href}
-      onClick={onSetActive}
-      onMouseEnter={() => { setHovered(true); scramble() }}
-      onMouseLeave={() => setHovered(false)}
-      aria-current={isActive ? 'true' : undefined}
-      style={{
-        color: isActive || hovered ? 'var(--color-50)' : 'var(--color-700)',
-        transition: 'color 150ms',
-        textDecoration: 'none',
-        cursor: 'pointer',
-      }}
-    >
-      {display}
-    </a>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <a
+        href={comingSoon ? undefined : href}
+        onClick={comingSoon ? (e) => e.preventDefault() : onSetActive}
+        onMouseEnter={() => { setHovered(true); if (!comingSoon) scramble() }}
+        onMouseLeave={() => setHovered(false)}
+        aria-current={isActive ? 'true' : undefined}
+        style={{
+          color: !comingSoon && (isActive || hovered) ? 'var(--color-50)' : 'var(--color-700)',
+          transition: 'color 150ms',
+          textDecoration: 'none',
+          cursor: comingSoon ? 'default' : 'pointer',
+          padding: '12px 16px',
+          margin: '-12px -16px',
+          display: 'inline-block',
+        }}
+      >
+        {display}
+      </a>
+
+      {comingSoon && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 'calc(100% + 8px)',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            opacity: hovered ? 1 : 0,
+            transition: 'opacity 250ms ease',
+            pointerEvents: 'none',
+            border: '1px solid #252626',
+            backgroundColor: 'var(--color-800)',
+            color: 'var(--color-700)',
+            padding: '8px 12px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Coming Soon!
+        </div>
+      )}
+    </div>
   )
 }
 
-const NAV_LINKS = [
+type SectionId = 'hero' | 'personas' | 'journey' | 'market'
+
+const NAV_LINKS: { label: string; href: string; sectionId: SectionId; comingSoon?: boolean }[] = [
   { label: 'AUDIENCE', href: '#personas', sectionId: 'personas' },
   { label: 'JOURNEY', href: '#journey', sectionId: 'journey' },
-  { label: 'MARKET', href: '#market', sectionId: 'market' },
-] as const
+  { label: 'MARKET', href: '#market', sectionId: 'market', comingSoon: true },
+]
 
 export function Nav() {
   const [activeSection, setActiveOnClick] = useActiveSection()
@@ -53,7 +87,7 @@ export function Nav() {
       }}
     >
       <Container className="h-full">
-        <div className="flex h-full items-center justify-between px-8">
+        <div className="flex h-full items-center justify-between px-4 md:px-8">
         <a href="#" aria-label="SPEED — scroll to top" className="flex-shrink-0">
           <svg width="82" height="28" viewBox="0 0 94 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M75.9426 2.27011C76.3075 2.2406 77.0093 2.26085 77.3934 2.26025L80.3447 2.26252L89.5359 2.26509C89.6837 2.26469 90.4313 2.26054 90.5062 2.38589C90.9762 3.1699 92.7804 5.38412 92.8217 6.14431C92.8328 6.35155 92.0231 8.05251 91.8964 8.34267L88.8506 15.31C88.4986 16.1111 88.1002 16.9358 87.761 17.7291C86.9403 19.6546 86.1004 21.5716 85.2407 23.4801C84.8588 24.3434 84.4329 25.379 84.0097 26.2069C83.6384 26.9328 82.5653 27.8072 81.9204 28.3856C79.771 30.2862 80.7082 30.121 77.7156 30.1247L73.9157 30.1223C73.56 30.1212 71.3729 30.1892 71.2688 30.0266C70.7611 29.2372 68.6902 26.9119 69.0087 26.0091C69.3447 25.0576 69.9469 23.9103 70.3177 23.0185C71.8709 19.3416 73.4535 15.6772 75.0655 12.0258L76.604 8.50299C76.9179 7.78646 77.3581 6.84716 77.6037 6.12549C77.2098 4.97032 75.9339 3.50815 75.395 2.41981L75.4267 2.3526C75.5717 2.26411 75.7682 2.27625 75.9426 2.27011ZM80.3291 5.98532C80.5219 6.62229 80.9152 6.80442 81.074 7.47155C80.6311 8.96949 79.6916 10.8306 79.0504 12.3255L74.6914 22.416C74.2407 23.4559 73.28 25.4643 72.9679 26.4883C74.9581 26.3877 76.9634 26.4807 78.9558 26.4184C79.1665 26.4117 79.39 26.3955 79.5993 26.3965C79.7315 26.3866 79.905 26.3435 79.9665 26.2287C80.5926 25.0558 81.1865 23.3744 81.7102 22.1828L85.9048 12.5051L87.7298 8.27077C88.0566 7.50204 88.426 6.73601 88.689 5.93854C86.3028 5.90406 83.8371 5.96668 81.4302 5.94235C81.0635 5.96879 80.6963 5.98312 80.3291 5.98532Z" fill="#FEFEFE"/>
@@ -65,20 +99,21 @@ export function Nav() {
         </a>
 
         <div
-          className="flex items-center gap-8"
+          className="flex items-center gap-4 md:gap-8"
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '12px',
             letterSpacing: '0.08em',
           }}
         >
-          {NAV_LINKS.map(({ label, href, sectionId }) => (
+          {NAV_LINKS.map(({ label, href, sectionId, comingSoon }) => (
             <NavLink
               key={label}
               label={label}
               href={href}
               isActive={activeSection === sectionId}
               onSetActive={() => setActiveOnClick(sectionId)}
+              comingSoon={comingSoon}
             />
           ))}
         </div>

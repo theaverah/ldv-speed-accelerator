@@ -82,7 +82,7 @@ src/
 
 ### Dark, typographic, motion-forward
 
-The design peg is [unmoth.com](https://unmoth.com) — premium automotive meets data science. Every decision is sharp and restrained: no border radius anywhere, no shadows, elevation communicated through colour difference only (`#08090A` base → `#121314` surfaces).
+The design theme is premium automotive meets data science. Every decision is sharp and restrained: no border radius anywhere, no shadows, elevation communicated through colour difference only (`#08090A` base → `#121314` surfaces).
 
 ### PageGrid alignment system
 
@@ -111,10 +111,10 @@ The Market section uses Recharts for the research time breakdown bar chart, but 
 - **[Claude Code](https://claude.ai/code)** — Primary development tool throughout the build. Used for implementation, debugging, architectural decisions, layout problem-solving, and iterative design refinement directly in the codebase.
 - **[Claude.ai](https://claude.ai)** — Used for planning, content structuring, and thinking through design decisions before and during development.
 - **[Figma MCP](https://www.figma.com/blog/figma-mcp/)** — Connected Claude Code directly to the Figma design file, enabling exact spacing, font sizes, colours, and layout values to be pulled into code without manual inspection.
-- **[QuiverAI](https://quiver.art)** — Used to vectorise vehicle reference images, which were then cleaned up and built into the inline SVG illustrations on the persona cards.
+- **[QuiverAI](https://quiver.art)** — Used to vectorise vehicle reference images, which were then cleaned up on Figma and built into the inline SVG illustrations on the persona cards.
 
 ---
 
 ## Built by
 
-Thea Verah for [The Speed Agency](https://thespeedagency.com.au)
+Thea Verah Sumagang for [The Speed Agency](https://thespeedagency.com.au)

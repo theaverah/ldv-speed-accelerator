@@ -31,6 +31,16 @@
   -webkit-user-select: none;
 }
 
+:root {
+  --container-px: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-px: max(160px, calc(50vw - 560px));
+  }
+}
+
 html {
   background-color: var(--color-bg);
   color: var(--color-50);

@@ -1,6 +1,6 @@
 export function PageGrid() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-60">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-60 hidden md:block">
       <div
         className="absolute inset-y-0 w-px"
         style={{ left: 'max(160px, calc(50vw - 560px))', backgroundColor: 'var(--color-800)' }}

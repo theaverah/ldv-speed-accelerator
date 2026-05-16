@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Container } from '@/components/ui/Container'
 import { ScrambleText, useScramble } from '@/components/ui/ScrambleText'
+import { Reveal } from '@/components/ui/Reveal'
 
 const VERBS = ['find', 'choose', 'remember', 'discover']
 
@@ -68,7 +69,7 @@ function CyclingVerb() {
           pointerEvents: 'none',
           fontFamily: 'var(--font-heading)',
           fontWeight: 400,
-          fontSize: '64px',
+          fontSize: 'clamp(28px, 5vw, 60px)',
         }}
       >
         {VERBS[(displayIdx + 1) % VERBS.length]}
@@ -79,48 +80,58 @@ function CyclingVerb() {
 
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const [theaHovered, setTheaHovered] = useState(false)
   const { display, scramble } = useScramble('TO THE SURFACE')
+  const { display: theaDisplay, scramble: theaScramble } = useScramble('Thea')
+  const { display: agencyDisplay, scramble: agencyScramble } = useScramble('The Speed Agency')
 
   return (
     <footer style={{ backgroundColor: 'var(--color-bg)', borderTop: '1px solid var(--color-800)' }}>
       <Container>
-        <div className="px-8 pt-24 pb-20">
-          <div className="flex flex-col items-center text-center gap-14">
+        <div className="px-4 md:px-8 pt-16 md:pt-24 pb-12 md:pb-20">
+          <div className="flex flex-col items-center text-center gap-10 md:gap-14">
             <div className="flex flex-col items-center gap-8">
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 400,
-                fontSize: '64px',
-                lineHeight: 1.3,
-                color: 'var(--color-50)',
-              }}
-            >
-              375,000 <em>people</em>
-              <span style={{ color: 'var(--color-700)' }}>
-                {' are'}
-                <br />
-                {'waiting to '}
-              </span>
-              <CyclingVerb />
-              <em> you.</em>
-            </h2>
-
-            <p
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: 1.5,
-                color: 'var(--color-600)',
-              }}
-            >
-              Behind every data point is a real person with a real reason to choose you.
-              <br />
-              We exist to find them, understand them, and connect them to you.
-            </p>
+              <Reveal>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 400,
+                    fontSize: 'clamp(28px, 5vw, 60px)',
+                    lineHeight: 1.3,
+                    color: 'var(--color-50)',
+                    textAlign: 'center',
+                  }}
+                >
+                  375,000 <em>people</em>
+                  <span style={{ color: 'var(--color-700)' }}>
+                    {' are'}
+                    <br />
+                    {'waiting to '}
+                  </span>
+                  <CyclingVerb />
+                  <em> you.</em>
+                </h2>
+              </Reveal>
+              <Reveal delay={0.15}>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: 1.5,
+                    color: 'var(--color-700)',
+                    textAlign: 'center',
+                  }}
+                >
+                  Behind every data point is a real person with a real reason to choose you.
+                  <br />
+                  We exist to find them, understand them, and connect them to you.
+                </p>
+              </Reveal>
             </div>
-            <ScrambleText text="LET'S TALK" />
+            <Reveal delay={0.3}>
+              <ScrambleText text="LET'S TALK" animateCorners noScramble />
+            </Reveal>
           </div>
         </div>
       </Container>
@@ -131,7 +142,7 @@ export function Footer() {
       {/* Bottom bar */}
       <Container>
         <div
-          className="px-8 py-6 flex items-center justify-between"
+          className="px-4 md:px-8 py-6 flex flex-col items-center gap-3 md:flex-row md:gap-0 md:items-center md:justify-between"
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '12px',
@@ -140,7 +151,29 @@ export function Footer() {
             color: 'var(--color-700)',
           }}
         >
-          <span>Designed and built by Thea for The Speed Agency</span>
+          <span className="text-center md:text-left">
+            Designed and built by{' '}
+            <a
+              href="https://theaverah.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={() => { setTheaHovered(true); theaScramble() }}
+              style={{ color: theaHovered ? 'var(--color-50)' : 'inherit', textDecoration: 'none', cursor: 'pointer', transition: 'color 150ms' }}
+              onMouseLeave={() => setTheaHovered(false)}
+            >
+              {theaDisplay}
+            </a>
+            {' '}for{' '}
+            <a
+              href="https://thespeedagency.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={agencyScramble}
+              style={{ color: 'var(--color-brand)', textDecoration: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}
+            >
+              {agencyDisplay}
+            </a>
+          </span>
           <button
             onClick={scrollToTop}
             onMouseEnter={scramble}

@@ -1,5 +1,7 @@
 'use client'
 
+import { segments, type Segment } from '@/data/personas'
+
 const BOUNDARY_LINES = new Set([1, 16, 40, 50])
 
 const BOUNDARY_HEIGHT = 88
@@ -20,24 +22,36 @@ const LABEL_POSITIONS: { lineIdx: number; text: string; side: LabelSide }[] = [
   { lineIdx: 49, text: '375,000', side: 'center' },
 ]
 
+// Invisible clickable zones — boundaries at midpoints between segments.
+// Lines use justify-between (50 items), so line i sits at i/49 * 100%.
+// Midpoint between index 15 and 16 = 15.5/49 ≈ 31.63%
+// Midpoint between index 39 and 40 = 39.5/49 ≈ 80.61%
+const HOVER_ZONES: { segmentId: number; left: string; width: string }[] = [
+  { segmentId: 1, left: '0%',      width: '31.63%' },
+  { segmentId: 2, left: '31.63%',  width: '48.98%' },
+  { segmentId: 3, left: '80.61%',  width: '19.39%' },
+]
+
 interface LineGraphProps {
   activeSegment: number | null
+  onHover: (id: number | null) => void
+  onOpen: (segment: Segment) => void
 }
 
-const FADE_INSIDE = 2   // lines inside active segment that fade in
-const FADE_OUTSIDE = 3  // lines outside (prev segment) that also fade
+const FADE_INSIDE = 2
+const FADE_OUTSIDE = 3
 const TOTAL_FADE = FADE_INSIDE + FADE_OUTSIDE
 
-export function LineGraph({ activeSegment }: LineGraphProps) {
+export function LineGraph({ activeSegment, onHover, onOpen }: LineGraphProps) {
   const getFadeOpacity = (lineNum: number): number | null => {
     if (activeSegment === null) return null
     const [start] = SEGMENT_RANGES[activeSegment]
-    const pos = lineNum - start // negative = before segment, 0+ = inside
+    const pos = lineNum - start
 
-    if (pos >= FADE_INSIDE) return null        // fully active, no fade needed
-    if (pos < -FADE_OUTSIDE) return null       // fully inactive, out of fade zone
+    if (pos >= FADE_INSIDE) return null
+    if (pos < -FADE_OUTSIDE) return null
 
-    const step = FADE_OUTSIDE + pos + 1        // 1 … TOTAL_FADE
+    const step = FADE_OUTSIDE + pos + 1
     return step / TOTAL_FADE
   }
 
@@ -65,9 +79,12 @@ export function LineGraph({ activeSegment }: LineGraphProps) {
   }
 
   return (
-    <div className="w-full flex flex-col" style={{ gap: '4px' }}>
-
-      {/* Lines — top-aligned, no background masking */}
+    <div
+      className="w-full flex flex-col"
+      style={{ gap: '4px', position: 'relative' }}
+      onMouseLeave={() => onHover(null)}
+    >
+      {/* Lines */}
       <div className="flex justify-between items-start w-full">
         {Array.from({ length: 50 }, (_, i) => {
           const lineNum = i + 1
@@ -89,7 +106,7 @@ export function LineGraph({ activeSegment }: LineGraphProps) {
         })}
       </div>
 
-      {/* Labels — below lines, no background */}
+      {/* Labels */}
       <div className="relative w-full" style={{ height: '16px' }}>
         {LABEL_POSITIONS.map(({ lineIdx, text, side }) => {
           const pct = (lineIdx / 49) * 100
@@ -136,6 +153,26 @@ export function LineGraph({ activeSegment }: LineGraphProps) {
           )
         })}
       </div>
+
+      {/* Invisible clickable zones — one per segment, full height, on top of lines */}
+      {HOVER_ZONES.map(({ segmentId, left, width }) => {
+        const segment = segments.find(s => s.id === segmentId)!
+        return (
+          <div
+            key={segmentId}
+            onMouseEnter={() => onHover(segmentId)}
+            onClick={() => onOpen(segment)}
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left,
+              width,
+              cursor: 'pointer',
+            }}
+          />
+        )
+      })}
     </div>
   )
 }

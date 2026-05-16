@@ -171,7 +171,7 @@ export function NodeCanvas() {
     }
   }, [])
 
-  return <canvas ref={cvs} className="absolute inset-0 w-full h-full" aria-hidden />
+  return <canvas ref={cvs} className="absolute inset-0 w-full h-full hidden md:block" aria-hidden />
 }
 
 export default NodeCanvas
