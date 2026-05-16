@@ -47,7 +47,7 @@ export function Hero() {
                   textAlign: 'center',
                 }}
               >
-                We know who they are, where they are, and what it takes to reach them.
+                Here's who they are and what it takes to reach them.
               </p>
             </Reveal>
           </div>

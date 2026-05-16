@@ -158,14 +158,27 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={() => { setTheaHovered(true); theaScramble() }}
-              style={{ color: theaHovered ? 'var(--color-50)' : 'inherit', textDecoration: 'none', cursor: 'pointer', transition: 'color 150ms' }}
+              style={{ color: theaHovered ? 'var(--color-50)' : 'inherit', textDecoration: 'none', cursor: 'pointer', transition: 'color 150ms, padding-right 150ms', paddingRight: theaHovered ? '12px' : '0px' }}
               onMouseLeave={() => setTheaHovered(false)}
             >
-              {theaDisplay}
+              <span style={{ position: 'relative' }}>
+                {theaDisplay}
+                <span style={{
+                  position: 'absolute',
+                  left: '100%',
+                  top: 0,
+                  paddingLeft: '2px',
+                  opacity: theaHovered ? 1 : 0,
+                  transform: theaHovered ? 'translate(1px, -1px)' : 'translate(0, 0)',
+                  transition: 'opacity 150ms ease, transform 150ms ease',
+                  fontSize: '12px',
+                  pointerEvents: 'none',
+                }}>↗</span>
+              </span>
             </a>
             {' '}for{' '}
             <a
-              href="https://thespeedagency.com.au"
+              href="https://thespeedagency.com/"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={agencyScramble}

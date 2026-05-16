@@ -18,34 +18,32 @@ export function Personas() {
     <>
       <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'hidden' }}>
 
-        {/* Label row — top and bottom borders are the dividers; label box has only side borders */}
-        <Reveal>
-          <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)', height: '80px' }}>
-            <Container>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  height: '40px',
-                  borderLeft: '1px solid var(--color-800)',
-                  borderRight: '1px solid var(--color-800)',
-                  borderBottom: '1px solid var(--color-800)',
-                  padding: '0 16px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-700)',
-                }}
-              >
-                Personas
-              </div>
-            </Container>
-          </div>
-        </Reveal>
+        {/* Label row — lines are static (no Reveal), label text lives inside */}
+        <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)', height: '80px' }}>
+          <Container>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                height: '40px',
+                borderLeft: '1px solid var(--color-800)',
+                borderRight: '1px solid var(--color-800)',
+                borderBottom: '1px solid var(--color-800)',
+                padding: '0 16px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--color-700)',
+              }}
+            >
+              Your Audience
+            </div>
+          </Container>
+        </div>
 
         <Container>
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col gap-0 pb-16 md:pb-0">
 
             {/* Headline — 32px padding from all surrounding lines */}
             <Reveal delay={0.1}>

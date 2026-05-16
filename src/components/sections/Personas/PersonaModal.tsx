@@ -39,7 +39,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
               maxHeight: '90vh',
               backgroundColor: 'var(--color-800)',
               border: '1px solid #252626',
-              padding: '24px',
+              padding: '40px',
             }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
                     color: 'var(--color-700)',
                   }}
                 >
-                  Sub-Personas
+                  {segment.count.toLocaleString()} people
                 </span>
                 <h3
                   style={{
@@ -102,7 +102,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
                       {sub.name}
                     </p>
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-700)' }}>
-                      {sub.count.toLocaleString()} Australians
+                      {sub.count.toLocaleString()} people
                     </p>
                   </div>
                   <div style={{ borderTop: '1px solid #252626' }} />
@@ -133,7 +133,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
                       {sub.name}
                     </p>
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-700)' }}>
-                      {sub.count.toLocaleString()} Australians
+                      {sub.count.toLocaleString()} people
                     </p>
                   </div>
                 ))}

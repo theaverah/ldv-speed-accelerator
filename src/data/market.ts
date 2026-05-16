@@ -30,7 +30,7 @@ export interface FunnelStage {
 export const statCards: StatCard[] = [
   {
     value: 35,
-    label: 'Average age of first-time ute buyer today',
+    label: 'Average age of first-time UTE buyer today',
     description: 'Was 42 in 2023',
     visualType: 'age-shift',
   },

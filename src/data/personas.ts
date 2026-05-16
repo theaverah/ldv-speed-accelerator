@@ -19,7 +19,7 @@ export interface Segment {
 export const segments: Segment[] = [
   {
     id: 1,
-    name: 'UTE Intenders',
+    name: 'UTE Seekers',
     count: 120000,
     countLabel: '120,000 Australians',
     description:
@@ -54,7 +54,7 @@ export const segments: Segment[] = [
   },
   {
     id: 2,
-    name: 'Large SUV Intenders',
+    name: 'Large SUV Seekers',
     count: 180000,
     countLabel: '180,000 Australians',
     description:
@@ -89,7 +89,7 @@ export const segments: Segment[] = [
   },
   {
     id: 3,
-    name: 'Van Intenders',
+    name: 'Van Seekers',
     count: 75000,
     countLabel: '75,000 Australians',
     description:
