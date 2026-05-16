@@ -8,7 +8,7 @@ A client-facing interactive web presentation built by The Speed Agency for LDV A
 
 ## About
 
-The site tells a story in six sections: a provocative opening stat, a narrative karaoke scroll, audience personas with interactive data, a customer journey, market overview with animated data visualisations, and a closing CTA. LDV's marketing team can explore it independently — clicking into persona cards, hovering over data, scrolling through the journey — without needing a guided walkthrough.
+The site tells a story in five sections: a provocative opening stat, a narrative karaoke scroll, audience personas with interactive data, a customer journey across five decision stages, and a closing CTA. LDV's marketing team can explore it independently — clicking into persona cards, hovering over the audience graph, stepping through the journey — without needing a guided walkthrough.
 
 All data is fictional and provided as a structural reference. The focus is on how the data is presented, not the data itself.
 
@@ -18,7 +18,7 @@ All data is fictional and provided as a structural reference. The focus is on ho
 
 | Category | Tool |
 |---|---|
-| Framework | Next.js 16 (App Router) |
+| Framework | Next.js 15 (App Router) |
 | Language | TypeScript (strict mode) |
 | Styling | Tailwind CSS v4 |
 | Scroll animations | GSAP + ScrollTrigger |
@@ -30,7 +30,7 @@ All data is fictional and provided as a structural reference. The focus is on ho
 
 Served locally from `/public/fonts/`:
 
-- **Arpona** — Hero headline and footer headline only (display weight, editorial)
+- **Arpona** — Hero headline, Journey section headline and stage names, footer headline (display weight, editorial)
 - **Monorama** — Nav labels, section labels, metadata, button text (monospaced, uppercase)
 - **DM Sans** — All other text: headings, body, card content (loaded via `next/font/google`)
 
@@ -64,8 +64,7 @@ src/
 │   │   ├── Hero/           # NodeCanvas (pulsing nodes, mouse pull) + ScrambleText CTA
 │   │   ├── KaraokeText.tsx # Scroll-triggered word-by-word reveal (GSAP)
 │   │   ├── Personas/       # Segment cards, sub-persona modal, 50-line audience graph
-│   │   ├── Journey/        # Dual-line EmotionGraph across 5 decision stages
-│   │   └── Market/         # Counter stats, momentum table, research chart, funnel
+│   │   └── Journey/        # 5-stage tab layout (desktop) + accordion (mobile), AnimatePresence transitions
 │   └── ui/
 │       ├── ScrambleText.tsx  # Letter-scramble button (used across all sections)
 │       ├── Container.tsx     # Content width wrapper aligned to PageGrid
@@ -90,7 +89,7 @@ Two fixed 1px vertical lines run the full page height, positioned at `max(160px,
 
 ### Three fonts, three jobs
 
-Arpona (display weight) is reserved strictly for the two biggest moments — the hero headline and the footer headline. Monorama (monospaced, uppercase) carries all technical and metadata text: nav labels, section tags, counts, button labels. DM Sans handles everything else. Mixing within a single element is never done.
+Arpona (display weight) is reserved for the highest-weight editorial moments — the hero headline, the Journey section headline and stage names, and the footer headline. Monorama (monospaced, uppercase) carries all technical and metadata text: nav labels, section tags, counts, button labels. DM Sans handles everything else. Mixing within a single element is never done.
 
 ### Data separated from presentation
 
@@ -98,11 +97,7 @@ All content lives in `/src/data/` as typed TypeScript files. Components read fro
 
 ### Interaction as personality
 
-Every button uses a binary letter-scramble on hover — characters cycle through `0` and `1` before resolving to the final text, giving the UI a consistent, slightly technical feel. Persona card illustrations (UTE, Large SUV, Van) animate on hover with a float and rock motion (Framer Motion keyframe arrays). The persona modal aligns sub-persona content into horizontal rows rather than independent columns, so Snapshot / Barrier / Trigger always start at the same vertical position regardless of text length.
-
-### All data, no charts-for-charts'-sake
-
-The Market section uses Recharts for the research time breakdown bar chart, but most data is presented in custom components (counter stats, momentum signals table, investment funnel) to maintain full visual control and stay on-brand.
+Every button uses a letter-scramble on hover — characters shuffle randomly before resolving to the final text, giving the UI a consistent, slightly technical feel. The persona modal aligns sub-persona content into horizontal rows rather than independent columns, so Snapshot / Barrier / Trigger always start at the same vertical position regardless of text length. The Journey section uses tab navigation on desktop (AnimatePresence fade between content panels) and a height-animated accordion on mobile.
 
 ---
 

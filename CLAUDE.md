@@ -20,8 +20,9 @@ The site tells a story in this order:
 2. **Karaoke Scroll Text** — Narrative bridge. Sets up the human story before personas.
 3. **Audience Personas** — Meet the 375,000+ people. 3 segments, 9 sub-personas.
 4. **Customer Journey** — Follow one person's decision journey across 5 stages.
-5. **Market Overview** — Zoom out to the full market picture with data visualizations.
-6. **Footer** — Closing statement and call to action.
+5. **Footer** — Closing statement and call to action.
+
+> **Note:** The Market Overview section was scoped out. Three sections (Personas, Journey, Footer) met the brief requirements. Market content lives in `src/data/market.ts` as a reference.
 
 ---
 
@@ -60,7 +61,7 @@ find /Library/Fonts ~/Library/Fonts -name "*.ttf" -o -name "*.otf" -o -name "*.w
 Once located, copy the font files into `/public/fonts/` and load them using `next/font/local`.
 
 Font roles:
-- **Arpona** — Hero headline and footer headline ONLY. Not used elsewhere.
+- **Arpona** — Hero headline, Journey section headline and stage names, footer headline. Reserved for the highest-weight editorial moments.
 - **Monorama** — Nav labels, section labels, metadata, tags, CTA button text, line graph numbers. Monospaced, uppercase, techy.
 - **DM Sans** — Everything else: section headings, card titles, body text, descriptions, card content. The dominant font across the site.
 
@@ -115,12 +116,13 @@ speed-accelerator/
 │   │   │   │   ├── PersonaModal.tsx  # Modal with 3 sub-personas
 │   │   │   │   └── LineGraph.tsx     # 50-line audience graph
 │   │   │   ├── Journey/
-│   │   │   │   ├── index.tsx         # Journey section root
-│   │   │   │   └── EmotionGraph.tsx  # Dual SVG line chart (emotional + rational)
+│   │   │   │   └── index.tsx         # Journey section root (desktop tabs + mobile accordion)
 │   │   │   └── Market/
-│   │   │       └── index.tsx         # Market section root
+│   │   │       └── index.tsx         # Market section root (stub — not implemented)
 │   │   └── ui/                       # Reusable primitives only
 │   │       ├── ScrambleText.tsx      # Letter scramble button (used across sections)
+│   │       ├── Reveal.tsx            # Framer Motion scroll-triggered fade+rise animation
+│   │       ├── Container.tsx         # Content width wrapper aligned to PageGrid
 │   │       └── CountUp.tsx           # Animated number counter
 │   ├── data/
 │   │   ├── personas.ts               # Segment + sub-persona data + types
@@ -141,15 +143,16 @@ speed-accelerator/
 
 ```
 Left: SPEED logo/wordmark
-Right: AUDIENCE · JOURNEY · MARKET
+Right: YOUR AUDIENCE · THEIR JOURNEY · THE OPPORTUNITY (coming soon)
 Behavior: Sticky, fixed at top. Active section highlights on scroll.
+Mobile: Logo scales down (h-5), font 10px, gap-1 between items, gap-4 min between logo and nav group.
 ```
 
 ### Hero
 
 ```
-Headline:  Your next 375,000+ customers already exist.
-Subtext:   This is their story — and how to reach them.
+Headline:  Your next 375,000 customers are already looking.
+Subtext:   Here's who they are and what it takes to reach them.
 CTA:       SHOW ME (with letter scramble animation on hover)
 
 Background: Subtle grid of 1px white lines at ~6% opacity.
@@ -173,25 +176,27 @@ the idea takes hold. That's where brands are won."
 ### Audience Personas
 
 ```
-Section label: PERSONAS · 3 SEGMENTS · 9 PERSONAS
+Section label: YOUR AUDIENCE
 Headline: Your market isn't one audience. It's nine.
 
 3 segment cards (click → opens modal):
+Modal header shows total count (e.g. "120,000 people"), not "Sub-Personas".
+Sub-persona counts displayed as "{n} people".
 
-CARD 1 — UTE Intenders
+CARD 1 — UTE Seekers
 Count: 120,000 Australians
 Description: "First-timers. They've never owned a UTE, but their current
 car is holding them back. The renovation project, the camping trip, the
 lifestyle block — it's all waiting on the right vehicle."
 
-CARD 2 — Large SUV Intenders
+CARD 2 — Large SUV Seekers
 Count: 180,000 Australians
 Description: "The biggest segment, but not one type of family. A blended
 household packing for six. A couple planning a six-month road trip. A
 parent buying today knowing their teen drives it in three years. Same
 vehicle. Completely different lives."
 
-CARD 3 — Van Intenders
+CARD 3 — Van Seekers
 Count: 75,000 Australians
 Description: "The smallest segment, but the most clear on what they need.
 These buyers aren't browsing. They know exactly what they want, and the
@@ -211,7 +216,7 @@ Interactive line graph below cards (50 vertical lines):
 ### Sub-Persona Modal Content (opens when card is clicked)
 
 ```
-UTE INTENDERS — 3 sub-personas:
+UTE SEEKERS — 3 sub-personas:
 
 1. The First-Home Renovator (32,000)
    Snapshot: Late 20s couple, first home in growth corridor suburb.
@@ -231,7 +236,7 @@ UTE INTENDERS — 3 sub-personas:
    Barrier:  Overwhelmed by spec sheets and tow ratings.
    Trigger:  Getting bogged in the paddock. Rural neighbour's recommendation.
 
-LARGE SUV INTENDERS — 3 sub-personas:
+LARGE SUV SEEKERS — 3 sub-personas:
 
 1. The Blended Household (52,000)
    Snapshot: Late 30s working parents, 4 kids from previous relationships.
@@ -251,7 +256,7 @@ LARGE SUV INTENDERS — 3 sub-personas:
    Barrier:  Split priorities between current and future driver needs.
    Trigger:  Teen passing learner's test. Shocking insurance quotes.
 
-VAN INTENDERS — 3 sub-personas:
+VAN SEEKERS — 3 sub-personas:
 
 1. The Creative Studio Operator (18,000)
    Snapshot: Freelance photographer/videographer in their 30s. Carries
@@ -275,11 +280,21 @@ VAN INTENDERS — 3 sub-personas:
 ### Customer Journey
 
 ```
-Section label: JOURNEY
-Headline: One decision. Five moments.
-Subtext: Follow the First-Home Renovator from first feeling to proud ownership.
+Section label: THEIR JOURNEY
+Headline: The decision happens long before the dealership.
+Subtext: Every one of these people takes the same road to a decision. But the path
+         is rarely straight, and it's never just about the car.
 
-5 stages (horizontal timeline or clickable cards):
+Implementation: Desktop — tab navigation, left column (5 tabs), right content panel
+                (AnimatePresence fade on tab switch, fixed 480px height).
+                Mobile — accordion, height-animated with AnimatePresence.
+                Tab labels: "It starts with a feeling." / "The browsing begins." /
+                "The dream meets the budget." / "The point of no return." / "Was it the right call?"
+
+ContentPanel layout: Arpona stage name (sentence case) with Monorama duration above it,
+                     then a 2×2 grid: Doing / Feeling / Barrier / Opportunity.
+
+5 stages (tab/accordion items):
 
 Stage 1 — THE ITCH (3-6 weeks)
 Emotional: 55/100 | Rational: 30/100
@@ -321,49 +336,6 @@ Touchpoints: Service visits, owner community apps, social media, dealer follow-u
 Barrier: Minor issues feel catastrophic. Servicing surprises erode trust.
 Opportunity: Welcome app with feature tutorials. Owner community programs.
 
-Key visualization: Dual-line graph showing emotional (warm) and rational (cool)
-scores across all 5 stages. Graph visible as navigation anchor at top of section.
-```
-
-### Market Overview
-
-```
-Section label: MARKET
-Headline: The market has already shifted. Here's the proof.
-
-PART 1 — Big Stats Row (3 animated counter stats):
-- 35 — Average age of first-time ute buyer today (was 42 in 2023)
-  Visual: Two numbers side by side, 42 ghosted/fading, 35 bright
-- 91% — Buyers who first research online
-  Visual: "9 in 10" rendered as 9 filled circles + 1 empty
-- 67% — Open to non-legacy/challenger brands like LDV
-  Visual: Dot grid of 100 dots, 67 illuminate on scroll in brand red
-  Label: "That's your window."
-
-PART 2 — Momentum Signals Table:
-Signal                              2023    2026    Direction
-Average age of first-time buyers    42      35      ↓ Younger
-Female-identifying intenders        14%     29%     ↑ Growing fast
-Buyers who researched online first  68%     91%     ↑ Digital-first
-Average research window (weeks)     18      11      ↓ Shorter
-Intenders who test drove 1+ brand   82%     54%     ↓ Brand-loyal earlier
-Metro vs regional intender mix      58/42   64/36   ↑ More urban
-Open to non-legacy brands           31%     67%     ↑ Open-minded
-
-PART 3 — Research Time Breakdown (horizontal bar chart):
-Long-form video (YouTube, CTV)    34%    +6pp
-Short-form social (Reels, TikTok) 19%    +11pp
-Brand-owned websites              14%    -3pp
-Peer & community forums           12%    +2pp
-Paid comparison sites             9%     -5pp
-In-person dealer visits           7%     -8pp
-Print & radio                     5%     -3pp
-
-PART 4 — Investment Allocation Framework (visual funnel):
-Top / Awareness       35%   Long-form video, CTV, social
-Mid / Consideration   40%   Short-form social, influencer, search
-Bottom / Conversion   20%   Retargeting, comparison tools, dealer
-Retention & Advocacy  5%    Owner community, referral programs
 ```
 
 ### Footer
@@ -405,22 +377,33 @@ Copyright: © 2026 The Speed Agency. All Rights Reserved.
 - Hover card → corresponding lines animate to 100% opacity
 - Label numbers blur surrounding lines slightly for legibility
 
-### Counter Stats (Market Overview)
-- Numbers count up from 0 when scrolled into view
-- Use GSAP or CountUp.js
+---
 
-### Journey Emotional Graph
-- Dual line graph animates drawing itself on scroll into view
-- Emotional line: warm color (brand red or amber)
-- Rational line: cool color (white or light grey)
+## Border System
+
+All borders are `1px solid var(--color-800)`. The goal is exactly 1px per visible line — no adjacent borders.
+
+### Vertical lines
+Two fixed `PageGrid` lines run full page height at `max(160px, calc(50vw - 560px))` from each edge. Desktop only (`hidden md:block`). These are decorative and never owned by sections.
+
+### Horizontal lines — section label pattern
+Each section with a label uses an outer `div` with `height: 80px` and `borderBottom` only. Inside sits an inline-flex label tag with `borderLeft + borderRight + borderBottom`. This produces two full-width horizontal lines 80px apart at the top of the section:
+- Line 1 = the previous section's bottom divider (shared — do NOT add `borderTop` to the section label div)
+- Line 2 = the section label div's own `borderBottom` at 80px
+
+Exception: the first labeled section after a section with no bottom divider (e.g. KaraokeText) must add its own `borderTop` to provide line 1.
+
+### Section bottom dividers
+Each section closes with `<div style={{ borderTop: '1px solid var(--color-800)' }} />`. This line doubles as the top line for the next section's label strip.
+
+**Do not add a bottom divider** if the next section already provides a top border (e.g. Footer's own `borderTop`). One element owns each line.
 
 ---
 
 ## Coding Rules
 
-- **Always reference DESIGN_SYSTEM.md** for all visual decisions before writing any component. It is the single source of truth for colors, typography, spacing, and component patterns.
 - **Always use TypeScript.** No `any` types.
-- **Always use Tailwind CSS** for styling. No inline styles unless absolutely necessary for dynamic animation values.
+- **Tailwind for layout, inline styles for design tokens.** Use Tailwind for structural layout (flex, grid, sizing, responsive breakpoints). Use inline styles for borders, colors, typography — these reference CSS variables and are easier to read at a glance than arbitrary Tailwind classes.
 - **Use CSS variables** for all colors (defined in globals.css). Never hardcode hex values in components.
 - **Spacing must follow 8pt grid.** Use Tailwind spacing scale: `p-8` = 32px, `p-16` = 64px etc.
 - **No border radius** anywhere. Use `rounded-none` explicitly.
@@ -456,7 +439,8 @@ The following skills are installed and should be used when relevant:
 - **Desktop first.** Design and build for 1440px wide viewport first.
 - **Mobile breakpoint required:** `md` (768px) minimum.
 - On mobile: single column layouts, stacked cards, simplified animations.
-- Nav collapses to hamburger on mobile.
+- Nav stays visible on mobile — no hamburger. Logo scales down (`h-5 → h-7`), font shrinks (`text-[10px] md:text-[12px]`), items allowed to wrap to 2 lines.
+- Use `pb-16 md:pb-0` on section containers to add breathing room between stacked sections on mobile when visual separators (like the line graph) are hidden.
 
 ---
 
