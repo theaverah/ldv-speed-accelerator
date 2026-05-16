@@ -84,7 +84,7 @@ export function Footer() {
   return (
     <footer style={{ backgroundColor: 'var(--color-bg)', borderTop: '1px solid var(--color-800)' }}>
       <Container>
-        <div className="px-8 pt-20 pb-16">
+        <div className="px-8 pt-24 pb-20">
           <div className="flex flex-col items-center text-center gap-14">
             <div className="flex flex-col items-center gap-8">
             <h2

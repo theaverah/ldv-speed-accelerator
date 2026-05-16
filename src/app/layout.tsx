@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { DM_Sans } from 'next/font/google'
 import PageGrid from '@/components/layout/PageGrid'
+import { NoRightClick } from '@/components/ui/NoRightClick'
 import './globals.css'
 
 const arpona = localFont({
@@ -49,6 +50,7 @@ export default function RootLayout({
       className={`${arpona.variable} ${monorama.variable} ${dmSans.variable}`}
     >
       <body className="antialiased">
+        <NoRightClick />
         <PageGrid />
         {children}
       </body>

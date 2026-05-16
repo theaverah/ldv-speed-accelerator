@@ -23,11 +23,11 @@ export function Hero() {
                 fontSize: '64px',
                 lineHeight: 1.3,
                 letterSpacing: '0.01em',
-                color: 'var(--color-50)',
+                color: 'var(--color-700)',
               }}
             >
               Your next{' '}
-              <span style={{ color: 'var(--color-700)' }}>375,000 customers</span>
+              <span style={{ color: 'var(--color-50)' }}>375,000 customers</span>
               <br />
               already exist.
             </h1>
@@ -41,7 +41,7 @@ export function Hero() {
                 color: 'var(--color-600)',
               }}
             >
-              This is their story — and how to reach them.
+              We know who they are, where they are, and what it takes to reach them.
             </p>
           </div>
 

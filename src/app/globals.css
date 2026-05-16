@@ -27,6 +27,8 @@
 *::after {
   border-radius: 0 !important;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 html {

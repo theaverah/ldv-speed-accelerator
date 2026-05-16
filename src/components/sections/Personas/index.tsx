@@ -15,32 +15,29 @@ export function Personas() {
 
   return (
     <>
-      <section id="audience" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'hidden' }}>
 
-        {/* Top divider */}
-        <div style={DIVIDER} />
-
-        {/* Label row — PERSONAS box at top-left, enclosed by dividers */}
-        <Container>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              border: '1px solid var(--color-800)',
-              padding: '12px 16px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '12px',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: 'var(--color-700)',
-            }}
-          >
-            Personas
-          </div>
-        </Container>
-
-        {/* Divider below label */}
-        <div style={DIVIDER} />
+        {/* Label row — top and bottom borders are the dividers; label box has only side borders */}
+        <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)' }}>
+          <Container>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                borderLeft: '1px solid var(--color-800)',
+                borderRight: '1px solid var(--color-800)',
+                padding: '12px 16px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--color-700)',
+              }}
+            >
+              Personas
+            </div>
+          </Container>
+        </div>
 
         <Container>
           <div className="flex flex-col gap-0">
@@ -61,7 +58,7 @@ export function Personas() {
 
             {/* Segment cards — flush with container edges, no gaps */}
             <div
-              className="grid grid-cols-3"
+              className="grid grid-cols-3 min-w-0"
               style={{
                 borderTop: '1px solid rgba(255,255,255,0.06)',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -79,7 +76,7 @@ export function Personas() {
             </div>
 
             {/* Interactive line graph */}
-            <div style={{ padding: '24px' }}>
+            <div style={{ padding: '32px' }}>
               <LineGraph activeSegment={hoveredCard} />
             </div>
 

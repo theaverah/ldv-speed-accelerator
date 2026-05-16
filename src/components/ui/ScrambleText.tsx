@@ -81,13 +81,13 @@ export function ScrambleText({ text, className, onClick }: ScrambleTextProps) {
         display: 'inline-grid',
         placeItems: 'center',
         fontFamily: 'var(--font-mono)',
-        fontSize: '12px',
+        fontSize: '10px',
         letterSpacing: '0.1em',
         textTransform: 'uppercase',
         color: 'var(--color-50)',
         background: 'var(--color-bg)',
         border: '1px solid var(--color-800)',
-        padding: '10px 28px',
+        padding: '10px 22px',
         cursor: 'pointer',
       }}
     >
