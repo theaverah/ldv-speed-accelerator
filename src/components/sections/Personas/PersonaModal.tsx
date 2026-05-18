@@ -48,7 +48,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
             onClick={e => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-start justify-between" style={{ marginBottom: '32px' }}>
+            <div className="flex items-start justify-between" style={{ marginBottom: '26px' }}>
               <div className="flex flex-col" style={{ gap: '8px' }}>
                 <span
                   style={{
@@ -96,7 +96,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
             {/* Mobile layout — one card per sub-persona, stacked */}
             <div className="flex flex-col gap-8 md:hidden">
               {segment.subPersonas.map((sub, i) => (
-                <div key={sub.name} className="flex flex-col" style={{ gap: '12px' }}>
+                <div key={sub.name} className="flex flex-col" style={{ gap: '20px' }}>
                   <div className="flex flex-col" style={{ gap: '4px' }}>
                     <p style={{ fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: '18px', lineHeight: 1.3, color: 'var(--color-50)' }}>
                       {sub.name}
@@ -129,7 +129,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
               <div className="grid grid-cols-3" style={{ gap: '44px', marginBottom: '12px' }}>
                 {segment.subPersonas.map(sub => (
                   <div key={sub.name} className="flex flex-col" style={{ gap: '4px' }}>
-                    <p style={{ fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: '20px', lineHeight: 1.3, color: 'var(--color-50)' }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: '18px', lineHeight: 1.3, color: 'var(--color-50)' }}>
                       {sub.name}
                     </p>
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-700)' }}>
@@ -140,7 +140,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
               </div>
 
               {/* Row: dividers */}
-              <div className="grid grid-cols-3" style={{ gap: '44px', marginBottom: '24px' }}>
+              <div className="grid grid-cols-3" style={{ gap: '44px', marginBottom: '30px' }}>
                 {segment.subPersonas.map(sub => (
                   <div key={sub.name} style={{ borderTop: '1px solid #252626' }} />
                 ))}
@@ -148,7 +148,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
 
               {/* Rows: snapshot / barrier / trigger */}
               {(['snapshot', 'barrier', 'trigger'] as const).map((key, i) => (
-                <div key={key} className="grid grid-cols-3" style={{ gap: '44px', marginBottom: i < 2 ? '16px' : 0 }}>
+                <div key={key} className="grid grid-cols-3" style={{ gap: '44px', marginBottom: i < 2 ? '20px' : 0 }}>
                   {segment.subPersonas.map(sub => (
                     <div key={sub.name} className="flex flex-col" style={{ gap: '4px' }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-700)' }}>
