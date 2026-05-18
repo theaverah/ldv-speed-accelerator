@@ -58,7 +58,7 @@ export const segments: Segment[] = [
     count: 180000,
     countLabel: '180,000 Australians',
     description:
-      "The biggest segment, but not one type of family. A blended household packing for six. A couple planning a six-month road trip. A parent buying today knowing their teen drives it in three years. Same vehicle. Completely different lives.",
+      "The biggest segment, but not one type of family. A couple planning a six-month road trip. A parent buying today knowing their teen drives it in three years. Same vehicle. Completely different lives.",
     lineRange: [17, 40],
     subPersonas: [
       {

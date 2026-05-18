@@ -22,14 +22,14 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
     <motion.div
       key={stage.id}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       className="flex flex-col h-full"
       style={{ gap: '24px' }}
     >
       {/* Duration (Monorama, above) + stage name (Arpona, sentence case, below) */}
-      <div className="flex flex-col" style={{ gap: '4px' }}>
+      <div className="flex flex-col" style={{ gap: '12px' }}>
         <span style={{
           fontFamily: 'var(--font-mono)',
           fontSize: '11px',
@@ -50,10 +50,11 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
         </h3>
       </div>
 
-      <div style={{ borderTop: B }} />
+
+      <div style={{ borderTop: B, marginTop: '-4px' }} />
 
       {/* 2×2 content grid — reduced row gap */}
-      <div className="grid grid-cols-2" style={{ columnGap: '32px', rowGap: '32px', flex: 1 }}>
+      <div className="grid grid-cols-2" style={{ columnGap: '32px', rowGap: '32px', marginTop: '20px' }}>
         {CONTENT_KEYS.map(({ key, label }) => (
           <div key={key} className="flex flex-col" style={{ gap: '8px' }}>
             <span style={{
@@ -92,15 +93,13 @@ export function Journey() {
       style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'hidden' }}
     >
       {/* Section label — lines are static (no Reveal), just like notebook rules */}
-      <div style={{ borderBottom: B, height: '80px' }}>
+      <div style={{ borderBottom: B, height: '48px' }}>
         <Container>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            height: '40px',
-            borderLeft: B,
+            height: '48px',
             borderRight: B,
-            borderBottom: B,
             padding: '0 16px',
             fontFamily: 'var(--font-mono)',
             fontSize: '12px',
@@ -189,7 +188,7 @@ export function Journey() {
             </div>
 
             {/* Right: content panel — no border, outer wrapper provides it */}
-            <div style={{ flex: 1, padding: '32px', overflow: 'hidden', alignSelf: 'stretch' }}>
+            <div style={{ flex: 1, padding: '40px', overflow: 'hidden', alignSelf: 'stretch' }}>
               <AnimatePresence mode="wait">
                 <ContentPanel key={activeId} stage={activeStage} />
               </AnimatePresence>

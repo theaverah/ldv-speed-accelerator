@@ -7,7 +7,7 @@ import type { Segment } from '@/data/personas'
 function UteIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 14px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 24px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
@@ -81,7 +81,7 @@ function UteIllustration({ hovered }: { hovered: boolean }) {
 function SuvIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 14px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '34px 34px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
@@ -276,7 +276,7 @@ function SuvIllustration({ hovered }: { hovered: boolean }) {
 function VanIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 14px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '34px 34px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
@@ -434,9 +434,9 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
       onClick={() => onOpen(segment)}
       onMouseEnter={() => { setHovered(true); onHover(segment.id) }}
       onMouseLeave={() => { setHovered(false); onHover(null) }}
-      className="cursor-pointer flex flex-col p-8"
+      className="cursor-pointer flex flex-col py-7 px-8"
       style={{
-        gap: '24px',
+        gap: '4px',
         backgroundColor: active ? '#0D0E0F' : 'var(--color-bg)',
         borderRight: '1px solid rgba(255,255,255,0.06)',
         borderLeft: (hasBorderLeft || isMobile) ? '1px solid rgba(255,255,255,0.06)' : undefined,
@@ -445,7 +445,7 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
       }}
     >
       {/* Name + count group */}
-      <div className="flex flex-col" style={{ gap: '8px' }}>
+      <div className="flex flex-col" style={{ gap: '4px' }}>
         <div className="flex items-start justify-between gap-4">
           <span
             style={{
@@ -487,7 +487,7 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
           fontWeight: 400,
           fontSize: '12px',
           lineHeight: '18px',
-          color: 'var(--color-700)',
+          color: 'var(--color-600)',
         }}
       >
         {segment.description}

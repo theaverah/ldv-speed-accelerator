@@ -16,19 +16,17 @@ export function Personas() {
 
   return (
     <>
-      <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'hidden' }}>
+      <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '79px', overflowX: 'hidden' }}>
 
         {/* Label row — lines are static (no Reveal), label text lives inside */}
-        <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)', height: '80px' }}>
+        <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)', height: '48px' }}>
           <Container>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                height: '40px',
-                borderLeft: '1px solid var(--color-800)',
+                height: '48px',
                 borderRight: '1px solid var(--color-800)',
-                borderBottom: '1px solid var(--color-800)',
                 padding: '0 16px',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '12px',
@@ -50,14 +48,14 @@ export function Personas() {
               <h2
                 className="p-8"
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: 'var(--font-heading)',
                   fontWeight: 400,
                   fontSize: '36px',
                   lineHeight: 1.2,
                   color: 'var(--color-50)',
                 }}
               >
-                Your market isn't one audience. It's nine.
+                Your market is not just one audience. There are nine.
               </h2>
             </Reveal>
 
@@ -87,7 +85,7 @@ export function Personas() {
             {/* Interactive line graph — hidden on mobile */}
             <div className="hidden md:block">
               <Reveal delay={0.15}>
-                <div style={{ padding: '32px' }}>
+                <div style={{ padding: '28px 32px' }}>
                   <LineGraph
                     activeSegment={hoveredCard}
                     onHover={setHoveredCard}
