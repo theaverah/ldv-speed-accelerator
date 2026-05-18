@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Segment } from '@/data/personas'
 import { useScramble } from '@/components/ui/ScrambleText'
@@ -12,6 +12,7 @@ interface PersonaModalProps {
 
 export function PersonaModal({ segment, onClose }: PersonaModalProps) {
   const { display: closeDisplay, scramble: closeScramble } = useScramble('Close')
+  const [closeHovered, setCloseHovered] = useState(false)
 
   useEffect(() => {
     if (!segment) return
@@ -75,10 +76,11 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
               </div>
               <button
                 onClick={onClose}
-                onMouseEnter={closeScramble}
+                onMouseEnter={() => { closeScramble(); setCloseHovered(true) }}
+                onMouseLeave={() => setCloseHovered(false)}
                 style={{
                   background: 'none',
-                  border: '1px solid #252626',
+                  border: `1px solid ${closeHovered ? 'var(--color-700)' : '#252626'}`,
                   color: 'var(--color-700)',
                   cursor: 'pointer',
                   padding: '8px 16px',
@@ -87,6 +89,7 @@ export function PersonaModal({ segment, onClose }: PersonaModalProps) {
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   flexShrink: 0,
+                  transition: 'border-color 200ms ease',
                 }}
               >
                 {closeDisplay}
