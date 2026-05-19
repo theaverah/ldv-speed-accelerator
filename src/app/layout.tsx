@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { DM_Sans } from 'next/font/google'
 import PageGrid from '@/components/layout/PageGrid'
 import { NoRightClick } from '@/components/ui/NoRightClick'
+import { CustomCursor } from '@/components/ui/CustomCursor'
 import './globals.css'
 
 const arpona = localFont({
@@ -51,6 +52,7 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <NoRightClick />
+        <CustomCursor />
         <PageGrid />
         {children}
       </body>

@@ -56,7 +56,7 @@ export function LineGraph({ activeSegment, onHover, onOpen }: LineGraphProps) {
   }
 
   const getLineStyle = (lineNum: number): { backgroundColor: string; opacity: number } => {
-    if (activeSegment === null) return { backgroundColor: 'rgba(255,255,255,0.12)', opacity: 1 }
+    if (activeSegment === null) return { backgroundColor: '#5C5D5E', opacity: 1 }
     const [start, end] = SEGMENT_RANGES[activeSegment]
 
     const fadeOpacity = getFadeOpacity(lineNum)
@@ -142,7 +142,7 @@ export function LineGraph({ activeSegment, onHover, onOpen }: LineGraphProps) {
                 fontFamily: 'var(--font-mono)',
                 fontSize: '12px',
                 letterSpacing: '0.04em',
-                color: activeSegment === null ? 'rgba(255,255,255,0.12)' : '#5C5D5E',
+                color: activeSegment === null ? '#5C5D5E' : '#5C5D5E',
                 opacity: labelOpacity,
                 whiteSpace: 'nowrap',
                 transition: 'opacity 200ms ease',

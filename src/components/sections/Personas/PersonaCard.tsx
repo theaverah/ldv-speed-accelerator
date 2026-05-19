@@ -7,11 +7,12 @@ import type { Segment } from '@/data/personas'
 function UteIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 24px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '22px 22px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
       <motion.svg
+        className="persona-illustration"
         viewBox="0 0 247 95"
         width="100%"
         height="100%"
@@ -81,11 +82,12 @@ function UteIllustration({ hovered }: { hovered: boolean }) {
 function SuvIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '34px 34px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '36px 36px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
       <motion.svg
+        className="persona-illustration"
         viewBox="0 0 247 111"
         width="100%"
         height="100%"
@@ -276,11 +278,12 @@ function SuvIllustration({ hovered }: { hovered: boolean }) {
 function VanIllustration({ hovered }: { hovered: boolean }) {
   return (
     <motion.div
-      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '34px 34px' }}
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '36px 36px' }}
       animate={{ opacity: hovered ? 1 : 0.62 }}
       transition={{ duration: 0.4 }}
     >
       <motion.svg
+        className="persona-illustration"
         viewBox="0 0 247 124"
         width="100%"
         height="100%"
@@ -451,7 +454,7 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
             style={{
               fontFamily: 'var(--font-body)',
               fontWeight: 500,
-              fontSize: '16px',
+              fontSize: '18px',
               lineHeight: 1.3,
               color: 'var(--color-50)',
             }}
@@ -465,7 +468,7 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
           style={{
             fontFamily: 'var(--font-body)',
             fontWeight: 400,
-            fontSize: '12px',
+            fontSize: '14px',
             color: 'var(--color-700)',
           }}
         >
@@ -485,8 +488,8 @@ export function PersonaCard({ segment, onOpen, onHover, hasBorderLeft, isLast, i
         style={{
           fontFamily: 'var(--font-body)',
           fontWeight: 400,
-          fontSize: '12px',
-          lineHeight: '18px',
+          fontSize: '14px',
+          lineHeight: 1.5,
           color: 'var(--color-600)',
         }}
       >

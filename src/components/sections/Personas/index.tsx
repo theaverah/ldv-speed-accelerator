@@ -16,7 +16,7 @@ export function Personas() {
 
   return (
     <>
-      <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '79px', overflowX: 'hidden' }}>
+      <section id="personas" style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '79px', overflowX: 'clip' }}>
 
         {/* Label row — lines are static (no Reveal), label text lives inside */}
         <div style={{ borderTop: '1px solid var(--color-800)', borderBottom: '1px solid var(--color-800)', height: '48px' }}>

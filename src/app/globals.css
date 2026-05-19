@@ -28,6 +28,7 @@
   border-radius: 0 !important;
   box-sizing: border-box;
   user-select: none;
+  cursor: none !important;
   -webkit-user-select: none;
 }
 
@@ -47,6 +48,11 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -54,7 +60,18 @@ body {
   color: var(--color-50);
   font-family: var(--font-body), system-ui, sans-serif;
   min-height: 100vh;
+  cursor: none;
 }
+
+.custom-cursor {
+  border-radius: 50% !important;
+}
+
+.persona-illustration path {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1;
+}
+
 
 h1,
 h2,

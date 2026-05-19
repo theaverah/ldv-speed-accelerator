@@ -23,7 +23,7 @@ export const segments: Segment[] = [
     count: 120000,
     countLabel: '120,000 Australians',
     description:
-      "First-timers. They've never owned a UTE, but their current car is holding them back. The renovation project, the camping trip, the lifestyle block — it's all waiting on the right vehicle.",
+      "First-timers. They've never owned a UTE, but their current car is holding them back. The renovation project and the camping trip are waiting on the right vehicle.",
     lineRange: [1, 16],
     subPersonas: [
       {
@@ -58,7 +58,7 @@ export const segments: Segment[] = [
     count: 180000,
     countLabel: '180,000 Australians',
     description:
-      "The biggest segment, but not one type of family. A couple planning a six-month road trip. A parent buying today knowing their teen drives it in three years. Same vehicle. Completely different lives.",
+      "The biggest segment, but not one type of buyer. A couple planning for a road trip. A parent buying today for a teenager tomorrow. One vehicle fits all of them differently.",
     lineRange: [17, 40],
     subPersonas: [
       {
@@ -93,7 +93,7 @@ export const segments: Segment[] = [
     count: 75000,
     countLabel: '75,000 Australians',
     description:
-      "The smallest segment, but the most clear on what they need. These buyers aren't browsing. They know exactly what they want, and the right specs at the right price wins every time.",
+      "The smallest segment, but the most decisive. These buyers know exactly what they need. The right specs at the right price wins every time.",
     lineRange: [41, 50],
     subPersonas: [
       {

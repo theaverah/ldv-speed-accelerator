@@ -32,7 +32,7 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
       <div className="flex flex-col" style={{ gap: '12px' }}>
         <span style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '11px',
+          fontSize: '12px',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
           color: 'var(--color-700)',
@@ -42,7 +42,7 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
         <h3 style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 400,
-          fontSize: '24px',
+          fontSize: '26px',
           lineHeight: 1.15,
           color: 'var(--color-50)',
         }}>
@@ -59,7 +59,7 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
           <div key={key} className="flex flex-col" style={{ gap: '8px' }}>
             <span style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
+              fontSize: '12px',
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
               color: 'var(--color-700)',
@@ -69,7 +69,7 @@ function ContentPanel({ stage }: { stage: JourneyStage }) {
             <p style={{
               fontFamily: 'var(--font-body)',
               fontWeight: 400,
-              fontSize: '13px',
+              fontSize: '14px',
               lineHeight: 1.7,
               color: 'var(--color-600)',
             }}>
@@ -90,7 +90,7 @@ export function Journey() {
   return (
     <section
       id="journey"
-      style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'hidden' }}
+      style={{ backgroundColor: 'var(--color-bg)', scrollMarginTop: '80px', overflowX: 'clip' }}
     >
       {/* Section label — lines are static (no Reveal), just like notebook rules */}
       <div style={{ borderBottom: B, height: '48px' }}>
@@ -173,7 +173,7 @@ export function Journey() {
                       textAlign: 'left',
                       cursor: 'pointer',
                       fontFamily: 'var(--font-body)',
-                      fontSize: '13px',
+                      fontSize: '14px',
                       fontWeight: 400,
                       lineHeight: 1.4,
                       transition: 'background-color 200ms ease, color 200ms ease',
