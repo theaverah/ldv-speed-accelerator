@@ -67,6 +67,16 @@ body {
   border-radius: 50% !important;
 }
 
+@media (hover: none) {
+  .custom-cursor {
+    display: none !important;
+  }
+
+  * {
+    cursor: auto !important;
+  }
+}
+
 .persona-illustration path {
   vector-effect: non-scaling-stroke;
   stroke-width: 1;

@@ -19,9 +19,14 @@ export function CustomCursor() {
     const onDown = () => { if (cursor) cursor.style.background = 'rgba(255,255,255,0.32)' }
     const onUp = () => { if (cursor) cursor.style.background = 'rgba(255,255,255,0.48)' }
 
+    const onLeave = () => { cursor.style.opacity = '0' }
+    const onEnter = () => { cursor.style.opacity = '1' }
+
     window.addEventListener('mousemove', move)
     window.addEventListener('mousedown', onDown)
     window.addEventListener('mouseup', onUp)
+    document.addEventListener('mouseleave', onLeave)
+    document.addEventListener('mouseenter', onEnter)
 
     const clickables = document.querySelectorAll('a, button, [role="button"], [style*="cursor: pointer"]')
     clickables.forEach(el => {
@@ -33,6 +38,8 @@ export function CustomCursor() {
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mousedown', onDown)
       window.removeEventListener('mouseup', onUp)
+      document.removeEventListener('mouseleave', onLeave)
+      document.removeEventListener('mouseenter', onEnter)
       clickables.forEach(el => {
         el.removeEventListener('mouseenter', onEnterClickable)
         el.removeEventListener('mouseleave', onLeaveClickable)
@@ -55,7 +62,7 @@ export function CustomCursor() {
         pointerEvents: 'none',
         zIndex: 9999,
         boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
-        transition: 'transform 0.08s ease',
+        transition: 'transform 0.08s ease, opacity 0.25s ease',
         willChange: 'transform',
       }}
       className="custom-cursor"

@@ -190,7 +190,7 @@ export function Journey() {
             {/* Right: content panel — no border, outer wrapper provides it */}
             <div style={{ flex: 1, padding: '40px', overflow: 'hidden', alignSelf: 'stretch' }}>
               <AnimatePresence mode="wait">
-                <ContentPanel key={activeId} stage={activeStage} />
+                {activeStage && <ContentPanel key={activeId} stage={activeStage} />}
               </AnimatePresence>
             </div>
 
